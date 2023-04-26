@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const connect = require('./mongodb.js');
 const swaggerInit = require('./swagger/swaggerInit.js');
+const axios = require('axios');
 
 connect();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 swaggerInit(app);
 
+// GET all products
 app.get('/products', async (req, res) => {
   try {
     const products = await Product.find();
@@ -26,9 +28,10 @@ app.get('/products', async (req, res) => {
   }
 });
 
-app.get('/product/:idToGet', async (req, res) => {
+// GET a specific product by ID
+app.get('/product/:id', async (req, res) => {
   try {
-    const id = req.params.idToGet;
+    const id = req.params.id;
     const product = await Product.findById(id);
     res.json(product);
   } catch (err) {
@@ -36,6 +39,7 @@ app.get('/product/:idToGet', async (req, res) => {
   }
 });
 
+// POST a new product
 app.post('/product', async (req, res) => {
   try {
     const { name, price } = req.body;
@@ -47,12 +51,13 @@ app.post('/product', async (req, res) => {
   }
 });
 
-app.put('/product/:idToUpdate', async (req, res) => {
+// UPDATE an existing product by ID
+app.put('/product/:id', async (req, res) => {
   try {
-    const { idToUpdate } = req.params;
+    const { id } = req.params;
     const { name, price } = req.body;
     const product = await Product.findByIdAndUpdate(
-      idToUpdate,
+      id,
       { name, price },
       { new: true }
     );
@@ -62,10 +67,11 @@ app.put('/product/:idToUpdate', async (req, res) => {
   }
 });
 
-app.delete('/product/:idToDelete', async (req, res) => {
+// DELETE an existing product by ID
+app.delete('/product/:id', async (req, res) => {
   try {
-    const { idToDelete } = req.params;
-    await Product.findByIdAndDelete(idToDelete);
+    const { id } = req.params;
+    await Product.findByIdAndDelete(id);
     res.sendStatus(204);
   } catch (err) {
     console.log(err.message);
