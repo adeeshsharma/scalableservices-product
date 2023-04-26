@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const connect = require('./mongodb.js');
 const swaggerInit = require('./swagger/swaggerInit.js');
-const axios = require('axios');
 
 connect();
 
