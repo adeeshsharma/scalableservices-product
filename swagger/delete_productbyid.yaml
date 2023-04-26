@@ -1,0 +1,16 @@
+/product/{idToDelete}:
+delete:
+  summary: Delete a product by ID
+  tags: [Products]
+  parameters:
+    - in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      description: The product ID
+  responses:
+    204:
+      description: No Content
+    404:
+      description: Product not found

@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+      example:
+        name: 'Example Product'
+        price: 19.99
