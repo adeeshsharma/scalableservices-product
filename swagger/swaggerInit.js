@@ -31,7 +31,7 @@ function swaggerInit(appInstance) {
       },
       servers: [
         {
-          url: `http://localhost:4000`,
+          url: `http://localhost:${process.env.PORT ?? 4000}`,
         },
       ],
       ...allSwagger, // Use the merged Swagger documentation object
