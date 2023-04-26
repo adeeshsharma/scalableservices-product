@@ -3,21 +3,13 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 const components = yaml.load('./swagger/components.yaml');
-const getProducts = yaml.load('./swagger/get_products.yaml');
-const getProductById = yaml.load('./swagger/get_productbyid.yaml');
-const postProduct = yaml.load('./swagger/post_product.yaml');
-const putProductById = yaml.load('./swagger/put_productbyid.yaml');
-const deleteProductById = yaml.load('./swagger/delete_productbyid.yaml');
+const products = yaml.load('./swagger/products.yaml');
 
 function swaggerInit(appInstance) {
   const allSwagger = {
     ...components,
     paths: {
-      ...getProducts,
-      ...getProductById,
-      ...postProduct,
-      ...putProductById,
-      ...deleteProductById,
+      ...products,
     },
   };
 
